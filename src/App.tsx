@@ -1,35 +1,28 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import ExerciseDisplay from "./components/ExerciseDisplay";
+import FileNameInput from "./components/FIleNameInput";
+import muscles1 from "./assets/muscles_1.svg"; // Import the SVG file
+import MusclesSvg from "./components/MusclesSvg"; // Import the SVG component
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [fileName, setFileName] = useState<string>("Ab_Roller");
+
+  const handleFileNameChange = (newFileName: string) => {
+    setFileName(newFileName);
+  };
+  console.log(fileName);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <p>Count:{} </p>
-    </>
+    <div>
+      <FileNameInput
+        fileName={fileName}
+        onFileNameChange={handleFileNameChange}
+      />
+      <ExerciseDisplay fileName={fileName} />
+      {/* <img src={muscles1} alt="Muscles Diagram" className="svg-background" /> */}
+      <MusclesSvg /> {/* Use the SVG component */}
+    </div>
   );
 }
 export default App;
