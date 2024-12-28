@@ -1,0 +1,18 @@
+# GitHub Copilot configuration file
+
+# Enable or disable Copilot globally
+enabled: true
+
+# Customize suggestions behavior
+suggestions:
+  # Enable or disable inline suggestions
+  inline: true
+  # Enable or disable block suggestions
+  block: true
+
+# Customize Copilot behavior for specific languages
+languages:
+  python:
+    enabled: true
+  javascript:
+    enabled: true
