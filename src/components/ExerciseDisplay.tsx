@@ -3,21 +3,30 @@ import { Exercise } from "../types/Exercise";
 
 interface ExerciseDisplayProps {
   fileName: string;
+  onMuscleChange: (muscle: string) => void; // Added callback prop
 }
 
-const ExerciseDisplay: React.FC<ExerciseDisplayProps> = ({ fileName }) => {
+const ExerciseDisplay: React.FC<ExerciseDisplayProps> = ({
+  fileName,
+  onMuscleChange,
+}) => {
   const [exercise, setExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
     fetch(`/exercices/${fileName}`)
       .then((response) => response.json())
-      .then((data) => setExercise(data))
+      .then((data) => {
+        setExercise(data);
+        if (data.primaryMuscles) {
+          onMuscleChange(data.primaryMuscles.join(", ")); // Pass primary muscles to parent
+        }
+      })
       .catch((error) => {
         setExercise(null);
         console.error("Error fetching the exercise daafsdta:", error);
       });
   }, [fileName]);
-
+  // This rerenders 2 times, why
   if (!exercise) {
     return <div>Loading...</div>;
   }
